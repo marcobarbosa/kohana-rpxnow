@@ -1,4 +1,4 @@
 *~
 
 # ignore my own config file, for now
-config/rpxnow.php
+*config/rpxnow.php
