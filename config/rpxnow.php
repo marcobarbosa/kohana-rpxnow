@@ -1,16 +1,16 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
-Route::set('participar', 'participar')
+Route::set('response', 'response')
     ->defaults(array(
         'controller' => 'user',
-        'action'     => 'signup',
+        'action'     => 'response',
     ));
 
 return array
-(	
-	'token_url' => 'http://localhost/sohker/response',
-	'modal' => 'true',
-	'language_preference' => 'pt-BR',
-	'domain' => 'https://sohker.rpxnow.com/',
-	'api_key' => 1209600	
+(
+    'token_url' => 'Set this to yoursite.com/response',
+    'modal' => 'true',
+    'language_preference' => 'en',
+    'domain' => 'YOUR_DOMAIN',
+    'api_key' => 'YOUR_API_KEY'
 );
