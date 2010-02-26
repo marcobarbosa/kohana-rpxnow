@@ -7,21 +7,27 @@
 
 class Rpxnow {
 
-    //protected $rpxApiKey = 'REPLACE_WITH_YOUR_RPX_API_KEY';
     protected $config = array();
 
     function __construct()
     {
-        $this->config = Kohana::config('file');
+        $this->config = Kohana::config('rpxnow');
     }
 
-    function test()
+    function rpxnow_script_tag()
     {
-        var_dump($this->config);
-        return $this->config;
+        $script = "";
+        $script .= "<script type=\"text/javascript\">";
+        $script .= "var rpxJsHost = ((\"https:\" == document.location.protocol) ? \"https://\" : \"http://static.\");";
+        $script .= "document.write(unescape(\"%3Cscript src='\" + rpxJsHost +";
+        $script .= "\"rpxnow.com/js/lib/rpx.js' type='text/javascript'%3E%3C/script%3E\"));";
+        $script .= "RPXNOW.language_preference = ".$this->config->language.";";
+        $script .= "RPXNOW.overlay = ".$this->config->overlay.";";
+        $script .= "</script>";
+        return $script;
     }
 
-    function openid_auth($rpxApiKey)
+    function openid_auth()
     {
         if(isset($_POST['token'])) {
 
@@ -30,10 +36,11 @@ class Rpxnow {
 
             /* STEP 2: Use the token to make the auth_info API call */
             $post_data = array('token' => $_POST['token'],
-            'apiKey' => $rpxApiKey,
+            'apiKey' => $this->config->api_key,
             'format' => 'json');
 
             $curl = curl_init();
+
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl, CURLOPT_URL, 'https://rpxnow.com/api/v2/auth_info');
             curl_setopt($curl, CURLOPT_POST, true);
@@ -74,6 +81,6 @@ class Rpxnow {
             // gracefully handle the error.  Hook this into your native error handling system.
             echo 'An error occured: ' . $auth_info['err']['msg'];
         }
-    } //end of function
+    } //end of openid_auth function
 
 } // end of class
