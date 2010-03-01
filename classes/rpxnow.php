@@ -29,6 +29,7 @@ class Rpxnow {
 
     function openid_auth()
     {
+        $return = '';
         if(isset($_POST['token'])) {
 
             /* STEP 1: Extract token POST parameter */
@@ -52,35 +53,14 @@ class Rpxnow {
 
             /* STEP 3: Parse the JSON auth_info response */
             $auth_info = json_decode($raw_json, true);
+            $return = $auth_info;
 
-            if ($auth_info['stat'] == 'ok') {
-
-                /* STEP 3 Continued: Extract the 'identifier' from the response */
-                $profile = $auth_info['profile'];
-                $identifier = $profile['identifier'];
-
-                if (isset($profile['photo']))  {
-                $photo_url = $profile['photo'];
-                }
-
-                if (isset($profile['displayName']))  {
-                $name = $profile['displayName'];
-                }
-
-                if (isset($profile['email']))  {
-                $email = $profile['email'];
-                }
-
-                /* STEP 4: Use the identifier as the unique key to sign the user into your system.
-                This will depend on your website implementation, and you should add your own
-                code here.
-                */
-            } //end of auth_info == ok
-            /* an error occurred */
         } else {
-            // gracefully handle the error.  Hook this into your native error handling system.
-            echo 'An error occured: ' . $auth_info['err']['msg'];
-        }
+          // gracefully handle the error.  Hook this into your native error handling system.
+          //echo 'An error occured: ' . $auth_info['err']['msg'];
+          $return = $auth_info['err']['msg'];
+      }
+        return $return;
     } //end of openid_auth function
 
 } // end of class
