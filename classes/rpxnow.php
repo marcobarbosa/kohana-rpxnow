@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
-// URL: http://gist.github.com/291396
+// SOURCE: http://gist.github.com/291396
 
 // Below is a very simple PHP 5 script that implements the RPX token URL processing.
 // The code below assumes you have the CURL HTTP fetching library.
@@ -14,17 +14,31 @@ class Rpxnow {
         $this->config = Kohana::config('rpxnow');
     }
 
-    function rpxnow_script_tag()
+    static function rpxnow_script_tag()
     {
         $script = "";
         $script .= "<script type=\"text/javascript\">";
         $script .= "var rpxJsHost = ((\"https:\" == document.location.protocol) ? \"https://\" : \"http://static.\");";
         $script .= "document.write(unescape(\"%3Cscript src='\" + rpxJsHost +";
         $script .= "\"rpxnow.com/js/lib/rpx.js' type='text/javascript'%3E%3C/script%3E\"));";
-        $script .= "RPXNOW.language_preference = ".$this->config->language.";";
-        $script .= "RPXNOW.overlay = ".$this->config->overlay.";";
+        $script .= "RPXNOW.language_preference = ".Kohana::config('rpxnow')->language;
+        $script .= "RPXNOW.overlay = ".Kohana::config('rpxnow')->overlay;
         $script .= "</script>";
         return $script;
+    }
+
+    function rpxnow_anchor_tag()
+    {
+        $anchor = "";
+        $anchor .= "<a class=\"rpxnow\" onclick=\"return false;\" href=\"https://sohker.rpxnow.com/openid/v2/signin?token_url=http%3A%2F%2Flocalhost%2Fsohker%2Fresponse\"> Sign In </a>";
+        return $anchor;
+    }
+
+    function rpxnow_iframe_tag()
+    {
+        $iframe = "";
+        //<iframe src="http://sohker.rpxnow.com/openid/embed?token_url=http%3A%2F%2Flocalhost%2Fsohker%2Fresponse" scrolling="no" frameBorder="no" allowtransparency="true" style="width:400px;height:240px"></iframe>
+        return $iframe;
     }
 
     function openid_auth()
@@ -58,7 +72,7 @@ class Rpxnow {
         } else {
           // gracefully handle the error.  Hook this into your native error handling system.
           //echo 'An error occured: ' . $auth_info['err']['msg'];
-          $return = $auth_info['err']['msg'];
+          $return = FALSE;
       }
         return $return;
     } //end of openid_auth function

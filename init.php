@@ -2,6 +2,6 @@
 
 Route::set('response', 'response')
     ->defaults(array(
-        'controller' => 'user',
+        'controller' => 'account',
         'action'     => 'response',
 ));
