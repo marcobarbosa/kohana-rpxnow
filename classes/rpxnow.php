@@ -14,7 +14,7 @@ class Rpxnow {
         $this->config = Kohana::config('rpxnow');
     }
 
-    static function rpxnow_script_tag()
+    static function script_tag()
     {
         $script = "";
         $script .= "<script type=\"text/javascript\">";
@@ -27,14 +27,14 @@ class Rpxnow {
         return $script;
     }
 
-    static function rpxnow_anchor_tag()
+    static function anchor_tag()
     {
         $anchor = "";
         $anchor .= "<a class=\"rpxnow\" onclick=\"return false;\" href=\"https://".Kohana::config('rpxnow')->domain."/openid/v2/signin?token_url=".rawurlencode(Kohana::config('rpxnow')->token_url).">".Kohana::config('rpxnow')->anchor_text."</a>";
         return $anchor;
     }
 
-    static function rpxnow_iframe_tag()
+    static function iframe_tag()
     {
         $iframe = "";
         $iframe .= "<iframe src=\"http://".Kohana::config('rpxnow')->domain."/openid/embed?token_url=".rawurlencode(Kohana::config('rpxnow')->token_url)." scrolling=\"no\" frameBorder=\"no\" allowtransparency=\"true\" style=\"width:400px;height:240px\"></iframe>";

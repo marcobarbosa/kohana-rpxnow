@@ -34,7 +34,7 @@ function action_response()
         }
 }
 
-5) The authentication should be working now. Now you must do your backend session
+5) The authentication should be working now. Now you must do your backend session by saving the 'identifier' in a table
 
 Suggestions are welcome, just message me on github.
 For issues, just create one ;)
