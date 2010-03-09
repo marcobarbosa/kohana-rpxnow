@@ -2,9 +2,11 @@
 
 return array
 (
-    'token_url' => 'Set this to yoursite.com/response',
+    'token_url' => 'Set this to yourdomain.com/response',
+    'anchor_text' => 'sign in',
     'modal' => 'true',
-    'language_preference' => 'en',
-    'domain' => 'YOUR_DOMAIN',
-    'api_key' => 'YOUR_API_KEY'
+    'overlay' => 'true',
+    'language' => 'en',
+    'domain' => 'YOUR_DOMAIN', // without the "http://" nor ending slash
+    'api_key' => 'YOUR_API_KEY',
 );

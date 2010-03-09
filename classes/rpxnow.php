@@ -27,17 +27,17 @@ class Rpxnow {
         return $script;
     }
 
-    function rpxnow_anchor_tag()
+    static function rpxnow_anchor_tag()
     {
         $anchor = "";
-        $anchor .= "<a class=\"rpxnow\" onclick=\"return false;\" href=\"https://sohker.rpxnow.com/openid/v2/signin?token_url=http%3A%2F%2Flocalhost%2Fsohker%2Fresponse\"> Sign In </a>";
+        $anchor .= "<a class=\"rpxnow\" onclick=\"return false;\" href=\"https://".Kohana::config('rpxnow')->domain."/openid/v2/signin?token_url=".rawurlencode(Kohana::config('rpxnow')->token_url).">".Kohana::config('rpxnow')->anchor_text."</a>";
         return $anchor;
     }
 
-    function rpxnow_iframe_tag()
+    static function rpxnow_iframe_tag()
     {
         $iframe = "";
-        //<iframe src="http://sohker.rpxnow.com/openid/embed?token_url=http%3A%2F%2Flocalhost%2Fsohker%2Fresponse" scrolling="no" frameBorder="no" allowtransparency="true" style="width:400px;height:240px"></iframe>
+        $iframe .= "<iframe src=\"http://".Kohana::config('rpxnow')->domain."/openid/embed?token_url=".rawurlencode(Kohana::config('rpxnow')->token_url)." scrolling=\"no\" frameBorder=\"no\" allowtransparency=\"true\" style=\"width:400px;height:240px\"></iframe>";
         return $iframe;
     }
 

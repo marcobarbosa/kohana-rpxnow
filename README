@@ -1,5 +1,40 @@
-Work in progress! No instructions yet.
+This module is working!
 
 RPX Overview
-
+============
 Working as a proxy between third party identity providers and your website, RPX helps you effortlessly authenticate users with their existing account on Facebook, Google, Yahoo!, Twitter, MySpace, AOL, Windows Live/MSN/Hotmail, or any other OpenID provider.
+
+How to use
+============
+1) Install the module by adding in your bootstrap file:
+'rpxnow'  => MODPATH.'rpxnow', // rpxnow openid authentication
+
+2) Change your information provided by rpx in init.php
+
+3) In your view, call the helpers provided by the module (script and iframe/anchor)
+Script must be called and you choose if you'd like an iframe or anchor:
+// login.php
+<?php echo rpxnow::rpxnow_script_tag(); ?>
+<?php echo rpxnow::rpxnow_iframe_tag(); ?>
+
+4) To make the authentication, call in your controller openid_auth():
+function action_response()
+{
+        $openid = new Rpxnow;
+        $result = $openid->openid_auth();
+        if($result['stat'] == 'ok')
+        {
+            $this->authenticate($result['profile']);
+            // profile will give you information such as verifiedEmail, gender, name, etc..
+            // var_dump($result['profile'])
+        }
+        else
+        {
+            // handle the error
+        }
+}
+
+5) The authentication should be working now. Now you must do your backend session
+
+Suggestions are welcome, just message me on github.
+For issues, just create one ;)
