@@ -21,16 +21,16 @@ class Rpxnow {
         $script .= "var rpxJsHost = ((\"https:\" == document.location.protocol) ? \"https://\" : \"http://static.\");";
         $script .= "document.write(unescape(\"%3Cscript src='\" + rpxJsHost +";
         $script .= "\"rpxnow.com/js/lib/rpx.js' type='text/javascript'%3E%3C/script%3E\"));";
-        $script .= "RPXNOW.language_preference = ".Kohana::config('rpxnow')->language;
-        $script .= "RPXNOW.overlay = ".Kohana::config('rpxnow')->overlay;
+        $script .= "RPXNOW.language_preference = ".Kohana::config('rpxnow')->language.";";
+        $script .= "RPXNOW.overlay = ".Kohana::config('rpxnow')->overlay.";";
         $script .= "</script>";
         return $script;
     }
 
-    static function anchor_tag()
+    static function anchor_tag($word)
     {
         $anchor = "";
-        $anchor .= "<a class=\"rpxnow\" onclick=\"return false;\" href=\"https://".Kohana::config('rpxnow')->domain."/openid/v2/signin?token_url=".rawurlencode(Kohana::config('rpxnow')->token_url).">".Kohana::config('rpxnow')->anchor_text."</a>";
+        $anchor .= "<a class=\"rpxnow\" onclick=\"return false;\" href=\"https://".Kohana::config('rpxnow')->domain."/openid/v2/signin?token_url=".rawurlencode(Kohana::config('rpxnow')->token_url)."\">".$word."</a>";
         return $anchor;
     }
 

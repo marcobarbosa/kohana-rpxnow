@@ -3,7 +3,6 @@
 return array
 (
     'token_url' => 'Set this to yourdomain.com/response',
-    'anchor_text' => 'sign in',
     'modal' => 'true',
     'overlay' => 'true',
     'language' => 'en',
